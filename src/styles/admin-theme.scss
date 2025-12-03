@@ -1,0 +1,128 @@
+/**
+ * QwickPress CMS - Custom Admin Theme
+ * 
+ * Customizes Payload CMS admin UI to match QwickApps branding
+ * while maintaining full Payload functionality.
+ * 
+ * Copyright (c) 2025 QwickApps.com. All rights reserved.
+ */
+
+:root {
+  /* ===================================
+   * QwickApps Brand Colors
+   * =================================== */
+  
+  /* Primary Brand Color - QwickApps Blue */
+  --theme-success-500: #007bff;
+  --theme-success-600: #0056b3;
+  --theme-success-700: #004085;
+  --theme-success-350: #4da3ff;
+  --theme-success-250: #80bdff;
+  --theme-success-150: #b3d9ff;
+  --theme-success-50: #e6f2ff;
+  
+  /* Accent Color */
+  --theme-warning-500: #ffc107;
+  --theme-warning-600: #e0a800;
+  --theme-warning-350: #ffd54f;
+  --theme-warning-250: #ffe082;
+  --theme-warning-150: #ffecb3;
+  
+  /* Error/Danger remains standard for clarity */
+  --theme-error-500: #dc3545;
+  --theme-error-600: #c82333;
+  
+  /* ===================================
+   * Elevation/Background Colors
+   * Subtle tweaks for QwickApps feel
+   * =================================== */
+  
+  /* Keep Payload's elevation system but with slight QwickApps tint */
+  --theme-elevation-50: #fafbfc;
+  --theme-elevation-100: #f5f7fa;
+  --theme-elevation-150: #eef2f7;
+  --theme-elevation-200: #e8ecf2;
+  --theme-elevation-300: #d8dfe7;
+  --theme-elevation-400: #c2cbd6;
+  --theme-elevation-500: #9ca8b8;
+  --theme-elevation-600: #6b7a90;
+  --theme-elevation-700: #495566;
+  --theme-elevation-800: #2d3748;
+  --theme-elevation-900: #1a202c;
+  --theme-elevation-1000: #0f1419;
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] {
+  /* Primary Brand Color adjustments for dark mode */
+  --theme-success-500: #4da3ff;
+  --theme-success-600: #007bff;
+  --theme-success-700: #0056b3;
+  --theme-success-350: #80bdff;
+  --theme-success-250: #b3d9ff;
+  
+  /* Keep dark mode elevation system clean */
+  --theme-elevation-50: #1a202c;
+  --theme-elevation-100: #1f2937;
+  --theme-elevation-150: #252e3d;
+  --theme-elevation-200: #2d3748;
+  --theme-elevation-300: #374151;
+  --theme-elevation-400: #4b5563;
+  --theme-elevation-500: #6b7280;
+  --theme-elevation-600: #9ca3af;
+  --theme-elevation-700: #d1d5db;
+  --theme-elevation-800: #e5e7eb;
+  --theme-elevation-900: #f3f4f6;
+  --theme-elevation-1000: #f9fafb;
+}
+
+/* ===================================
+ * Brand-specific UI enhancements
+ * =================================== */
+
+/* Subtle QwickApps branding on primary buttons */
+.btn--style-primary,
+.btn--icon-style-with-label.btn--style-primary {
+  background-color: var(--theme-success-500);
+  border-color: var(--theme-success-500);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--theme-success-600);
+    border-color: var(--theme-success-600);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: var(--theme-success-700);
+    border-color: var(--theme-success-700);
+  }
+}
+
+/* Links with QwickApps blue */
+a {
+  color: var(--theme-success-500);
+  
+  &:hover {
+    color: var(--theme-success-600);
+  }
+}
+
+/* Active navigation items */
+.nav__link.nav__link--active {
+  border-left-color: var(--theme-success-500);
+  background-color: var(--theme-success-50);
+  color: var(--theme-success-700);
+}
+
+[data-theme="dark"] .nav__link.nav__link--active {
+  background-color: var(--theme-elevation-200);
+  color: var(--theme-success-350);
+}
+
+/* ===================================
+ * Maintain Payload UI integrity
+ * Only override colors, not structure
+ * =================================== */
+
+/* Ensure admin UI remains fully functional */
+/* No changes to layout, spacing, or structural CSS */
+/* Only color/branding customizations above */

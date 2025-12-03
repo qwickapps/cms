@@ -1,0 +1,352 @@
+/**
+ * QwickPress Admin Theme - QwickApps Branding
+ *
+ * Customizes Payload CMS colors to match QwickApps brand (Blue #007bff)
+ * Automatically supports both light and dark modes via Payload's color system
+ *
+ * Copyright (c) 2025 QwickApps.com. All rights reserved.
+ */
+
+:root {
+  /* ===================================
+   * QwickApps Brand Blue (#007bff = rgb(0, 123, 255))
+   * Override the success color (primary action color in Payload)
+   * =================================== */
+
+  /* Base blue color scale - QwickApps Blue */
+  --color-success-50: rgb(230, 242, 255);
+  --color-success-100: rgb(204, 229, 255);
+  --color-success-150: rgb(179, 216, 255);
+  --color-success-200: rgb(153, 204, 255);
+  --color-success-250: rgb(128, 191, 255);
+  --color-success-300: rgb(102, 178, 255);
+  --color-success-350: rgb(77, 165, 255);
+  --color-success-400: rgb(51, 153, 255);
+  --color-success-450: rgb(26, 140, 255);
+  --color-success-500: rgb(0, 123, 255);      /* #007bff - QwickApps Primary */
+  --color-success-550: rgb(0, 111, 230);
+  --color-success-600: rgb(0, 98, 204);
+  --color-success-650: rgb(0, 86, 179);
+  --color-success-700: rgb(0, 74, 153);
+  --color-success-750: rgb(0, 62, 128);
+  --color-success-800: rgb(0, 49, 102);
+  --color-success-850: rgb(0, 37, 77);
+  --color-success-900: rgb(0, 25, 51);
+  --color-success-950: rgb(0, 12, 26);
+
+  /* Also make the blue color scale match */
+  --color-blue-50: var(--color-success-50);
+  --color-blue-100: var(--color-success-100);
+  --color-blue-150: var(--color-success-150);
+  --color-blue-200: var(--color-success-200);
+  --color-blue-250: var(--color-success-250);
+  --color-blue-300: var(--color-success-300);
+  --color-blue-350: var(--color-success-350);
+  --color-blue-400: var(--color-success-400);
+  --color-blue-450: var(--color-success-450);
+  --color-blue-500: var(--color-success-500);
+  --color-blue-550: var(--color-success-550);
+  --color-blue-600: var(--color-success-600);
+  --color-blue-650: var(--color-success-650);
+  --color-blue-700: var(--color-success-700);
+  --color-blue-750: var(--color-success-750);
+  --color-blue-800: var(--color-success-800);
+  --color-blue-850: var(--color-success-850);
+  --color-blue-900: var(--color-success-900);
+  --color-blue-950: var(--color-success-950);
+}
+
+/* Dark mode is automatically handled by Payload's color mapping system */
+/* The html[data-theme='dark'] rules in Payload's colors.scss will invert these colors */
+
+/* ===================================
+ * Material Design Enhancements
+ * =================================== */
+
+/* List view improvements */
+.list-controls__wrap {
+  padding: 0 1.5rem 1rem;
+}
+
+/* Hide the broken search icon */
+.list-controls__search .search-icon,
+.list-controls__search > div:first-child {
+  display: none !important;
+}
+
+/* Add proper search icon with CSS */
+.list-controls__search {
+  position: relative;
+}
+
+.list-controls__search input {
+  padding-left: 2.25rem !important;
+  font-size: 0.9375rem !important;
+}
+
+.list-controls__search::before {
+  content: '';
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Dark mode search icon */
+html[data-theme='dark'] .list-controls__search::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ccc'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E");
+}
+
+/* Collection list padding */
+.collection-list {
+  padding: 0 !important;
+}
+
+.collection-list > .list-controls {
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Table container spacing */
+.table-wrapper {
+  margin: 0 1.5rem 1.5rem;
+}
+
+/* Reduce excessive vertical spacing */
+.template-default {
+  padding-top: 0 !important;
+}
+
+/* Improved button styling */
+.btn,
+button[type="button"],
+button[type="submit"],
+.form-submit button {
+  border-radius: 5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+  font-size: 0.9375rem !important;
+}
+
+.btn:hover,
+button[type="button"]:hover,
+button[type="submit"]:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn:active,
+button[type="button"]:active,
+button[type="submit"]:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Enhanced card styling */
+.card,
+.collection-list,
+.render-fields,
+.field-type-group {
+  border-radius: 8px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  transition: box-shadow 0.2s ease !important;
+}
+
+.card:hover,
+.collection-list:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Table enhancements */
+.table-wrapper,
+.payload-table {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.table thead {
+  background: var(--theme-elevation-100) !important;
+}
+
+.table tbody tr {
+  transition: background-color 0.15s ease !important;
+}
+
+.table tbody tr:hover {
+  background: var(--theme-elevation-50) !important;
+}
+
+/* Input field improvements */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+textarea,
+select {
+  border-radius: 5px !important;
+  border: 1px solid var(--theme-elevation-300) !important;
+  transition: all 0.15s ease !important;
+  font-size: 0.9375rem !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-success-500) !important;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1) !important;
+  outline: none !important;
+}
+
+/* Form groups spacing */
+.field-type-text,
+.field-type-textarea,
+.field-type-select,
+.field-type-number,
+.field-type-email {
+  margin-bottom: 1.25rem !important;
+}
+
+/* Enhanced navigation */
+.nav-group {
+  margin-bottom: 0.5rem !important;
+}
+
+.nav-link {
+  border-radius: 6px !important;
+  margin-bottom: 2px !important;
+  transition: all 0.15s ease !important;
+}
+
+.nav-link:hover {
+  background: var(--theme-elevation-100) !important;
+  transform: translateX(4px) !important;
+}
+
+.nav-link.active {
+  background: linear-gradient(90deg, var(--color-success-500) 0%, var(--color-success-600) 100%) !important;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25) !important;
+}
+
+/* Modal and drawer improvements */
+.modal,
+.drawer {
+  border-radius: 12px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+}
+
+.modal-header,
+.drawer-header {
+  border-bottom: 1px solid var(--theme-elevation-200) !important;
+  padding: 1.5rem !important;
+}
+
+/* Badge and pill styling */
+.pill,
+.badge {
+  border-radius: 12px !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+}
+
+/* Improved spacing and typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600 !important;
+  letter-spacing: -0.015em !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Collection title */
+.collection-list h1,
+.list-view h1 {
+  font-size: 1.75rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Collection description */
+.view-description {
+  font-size: 0.9375rem !important;
+  margin-bottom: 1.25rem !important;
+  opacity: 0.8;
+}
+
+/* List controls enhancement */
+.list-controls {
+  background: var(--theme-elevation-50) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  margin-bottom: 1.5rem !important;
+  border: 1px solid var(--theme-elevation-200) !important;
+}
+
+/* Pagination improvements */
+.pagination {
+  gap: 0.5rem !important;
+}
+
+.pagination button {
+  border-radius: 6px !important;
+  min-width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+
+/* Document controls */
+.document-controls {
+  gap: 0.75rem !important;
+  padding: 1rem !important;
+  background: var(--theme-elevation-50) !important;
+  border-radius: 8px !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Status indicators */
+.status-published {
+  color: #10b981 !important;
+}
+
+.status-draft {
+  color: #f59e0b !important;
+}
+
+/* Loading states */
+.loading-overlay {
+  backdrop-filter: blur(4px) !important;
+}
+
+/* Dark mode specific enhancements */
+html[data-theme='dark'] .table thead {
+  background: var(--theme-elevation-200) !important;
+}
+
+html[data-theme='dark'] .list-controls {
+  background: var(--theme-elevation-100) !important;
+  border-color: var(--theme-elevation-400) !important;
+}
+
+html[data-theme='dark'] .document-controls {
+  background: var(--theme-elevation-100) !important;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-success-500) !important;
+  outline-offset: 2px !important;
+}

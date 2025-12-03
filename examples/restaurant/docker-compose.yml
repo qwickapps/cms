@@ -1,0 +1,34 @@
+# Standalone Docker Compose for Restaurant
+# Usage: docker compose up
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: qwickapps
+      POSTGRES_PASSWORD: qwickapps
+      POSTGRES_DB: restaurant
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U qwickapps -d restaurant"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://qwickapps:qwickapps@postgres:5432/restaurant
+      PAYLOAD_SECRET: restaurant-secret-key-change-in-production
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

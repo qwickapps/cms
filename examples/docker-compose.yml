@@ -1,0 +1,84 @@
+# Docker Compose for running all @qwickapps/cms examples
+# Usage: docker compose up
+
+services:
+  # Shared PostgreSQL database
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: qwickapps
+      POSTGRES_PASSWORD: qwickapps
+      POSTGRES_DB: qwickapps
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U qwickapps"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Photography Portfolio - Port 3001
+  photography:
+    build:
+      context: ./photography-portfolio
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    environment:
+      DATABASE_URL: postgres://qwickapps:qwickapps@postgres:5432/photography
+      PAYLOAD_SECRET: photography-secret-key-change-in-production
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3001
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Restaurant - Port 3002
+  restaurant:
+    build:
+      context: ./restaurant
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    environment:
+      DATABASE_URL: postgres://qwickapps:qwickapps@postgres:5432/restaurant
+      PAYLOAD_SECRET: restaurant-secret-key-change-in-production
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3002
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # DJ Portfolio - Port 3003
+  dj-portfolio:
+    build:
+      context: ./dj-portfolio
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
+    environment:
+      DATABASE_URL: postgres://qwickapps:qwickapps@postgres:5432/dj_portfolio
+      PAYLOAD_SECRET: dj-secret-key-change-in-production
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3003
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Travel Blog - Port 3004
+  travel-blog:
+    build:
+      context: ./travel-blog
+      dockerfile: Dockerfile
+    ports:
+      - "3004:3000"
+    environment:
+      DATABASE_URL: postgres://qwickapps:qwickapps@postgres:5432/travel_blog
+      PAYLOAD_SECRET: travel-secret-key-change-in-production
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3004
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

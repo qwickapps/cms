@@ -1,0 +1,104 @@
+{
+  "name": "@qwickapps/cms",
+  "version": "0.2.0",
+  "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./collections": {
+      "types": "./dist/collections/index.d.ts",
+      "default": "./dist/collections/index.js"
+    },
+    "./globals": {
+      "types": "./dist/globals/index.d.ts",
+      "default": "./dist/globals/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "default": "./dist/components/index.js"
+    },
+    "./blocks": {
+      "types": "./dist/blocks/index.d.ts",
+      "default": "./dist/blocks/index.js"
+    },
+    "./plugins": {
+      "types": "./dist/plugins/index.d.ts",
+      "default": "./dist/plugins/index.js"
+    },
+    "./providers": {
+      "types": "./dist/providers/index.d.ts",
+      "default": "./dist/providers/index.js"
+    },
+    "./nextjs": {
+      "types": "./dist/nextjs/index.d.ts",
+      "default": "./dist/nextjs/index.js"
+    },
+    "./admin": {
+      "types": "./dist/admin/index.d.ts",
+      "default": "./dist/admin/index.js"
+    },
+    "./logging": {
+      "types": "./dist/logging/index.d.ts",
+      "default": "./dist/logging/index.js"
+    },
+    "./styles/admin-theme.css": "./dist/styles/admin-theme.css",
+    "./styles/admin-theme.scss": "./src/styles/admin-theme.scss"
+  },
+  "scripts": {
+    "build": "tsc && pnpm run copy-styles",
+    "copy-styles": "mkdir -p dist/styles dist/admin/components/styles && cp src/styles/*.css dist/styles/ 2>/dev/null || true && cp src/admin/components/styles/*.css dist/admin/components/styles/ 2>/dev/null || true",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "validate": "./qa/clean-install/validate.sh",
+    "prepublishOnly": "npm run validate"
+  },
+  "peerDependencies": {
+    "@mui/icons-material": ">=6.0.0",
+    "@mui/material": ">=6.0.0",
+    "@payloadcms/db-postgres": "^3.0.0",
+    "@payloadcms/next": "^3.0.0",
+    "@payloadcms/richtext-lexical": "^3.0.0",
+    "@payloadcms/ui": "^3.0.0",
+    "@qwickapps/react-framework": "*",
+    "@qwickapps/schema": "*",
+    "next": "^15.5.6",
+    "payload": "^3.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.3.3"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@mui/material-nextjs": "^7.3.5",
+    "@payloadcms/email-nodemailer": "^3.63.0",
+    "@payloadcms/live-preview-react": "^3.65.0"
+  },
+  "optionalDependencies": {
+    "@qwickapps/log-client": "^1.0.0",
+    "@qwickapps/logging": "^1.0.1"
+  },
+  "author": "QwickApps <legal@qwickapps.com>",
+  "license": "PolyForm-Shield-1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raajkumars/qwickapps.git",
+    "directory": "packages/qwickapps-cms"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
