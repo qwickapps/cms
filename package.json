@@ -1,6 +1,6 @@
 {
   "name": "@qwickapps/cms",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
   "type": "module",
   "main": "./dist/index.js",
@@ -78,7 +78,6 @@
     "@payloadcms/next": "^3.0.0",
     "@payloadcms/richtext-lexical": "^3.0.0",
     "@payloadcms/ui": "^3.0.0",
-    "@qwickapps/log-client": "^1.0.0",
     "@qwickapps/react-framework": "^1.0.0",
     "@qwickapps/schema": "^1.0.0",
     "@types/node": "^20.11.0",
@@ -102,7 +101,6 @@
     "server-only": "^0.0.1"
   },
   "optionalDependencies": {
-    "@qwickapps/log-client": "^1.0.0",
     "@qwickapps/logging": "^1.0.1"
   },
   "author": "QwickApps <legal@qwickapps.com>",

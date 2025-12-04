@@ -60,6 +60,7 @@ let LogClientClass: any = null;
 
 // Try to load optional dependencies
 try {
+  // @ts-expect-error - optional dependency, may not be installed
   const loggingModule = await import('@qwickapps/logging');
   // Use getLogger factory function which returns a logger instance
   getLoggerFn = (namespace: string) => loggingModule.getLogger(namespace) as unknown as LoggerInterface;
@@ -68,6 +69,7 @@ try {
 }
 
 try {
+  // @ts-expect-error - optional dependency, may not be installed or published
   const logClientModule = await import('@qwickapps/log-client');
   LogClientClass = logClientModule.LogClient;
 } catch {
