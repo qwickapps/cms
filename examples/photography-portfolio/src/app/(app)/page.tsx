@@ -27,7 +27,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      {page.content && <BlockRenderer blocks={page.content} />}
+      {page.layout && <BlockRenderer blocks={page.layout} />}
     </main>
   );
 }

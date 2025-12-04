@@ -4,51 +4,64 @@ A professional photography portfolio website built with @qwickapps/cms.
 
 ## Features
 
-- **Hero Section** - Stunning full-screen hero with portfolio highlights
-- **Photo Galleries** - Organized photo collections by category
-- **About Page** - Photographer bio and equipment
-- **Services** - Wedding, portrait, commercial photography services
+- **Hero Section** - Stunning full-screen hero with background image
+- **Photo Galleries** - Portfolio organized by category (portraits, weddings, lifestyle)
+- **About Page** - Photographer bio
 - **Contact Form** - Inquiry form with CAPTCHA protection
-- **Blog** - Behind-the-scenes and photography tips
 
 ## Quick Start
 
-### Using Docker (Recommended)
+### Interactive Setup (Recommended)
+
+The interactive setup script guides you through configuration:
 
 ```bash
-# Start the site
-docker compose up
-
-# Open in browser
-open http://localhost:3000
-
-# Admin panel
-open http://localhost:3000/admin
+# Run the interactive setup
+npm run setup
 ```
 
-### Local Development
+This will:
+1. Check prerequisites (Node.js, npm)
+2. Let you choose your database option (Docker, local PostgreSQL, or custom URL)
+3. Create `.env` file with your configuration
+4. Install dependencies
+5. Seed the database with demo content
+
+### Using Docker
 
 ```bash
-# Install dependencies
+# One command to start everything
+npm run docker:dev
+
+# Or step by step:
+npm run docker:up    # Start PostgreSQL on port 5433
+npm run seed         # Seed demo content
+npm run dev          # Start the dev server
+```
+
+### Local PostgreSQL
+
+If you have PostgreSQL installed locally:
+
+```bash
+# Create .env file with your DATABASE_URL
+echo "DATABASE_URL=postgresql://user:password@localhost:5432/photography" > .env
+
+# Install and seed
 npm install
-
-# Set up environment
-cp .env.example .env
-
-# Run database migrations
-npm run payload migrate
-
-# Seed sample data
 npm run seed
-
-# Start development server
 npm run dev
 ```
 
-## Default Admin Credentials
+### View the Site
 
-- Email: `admin@example.com`
-- Password: `admin123`
+- **Website**: http://localhost:3000
+- **Admin Panel**: http://localhost:3000/admin
+
+## Demo Credentials
+
+- Email: `admin@photography.demo`
+- Password: `demo1234`
 
 ## Project Structure
 

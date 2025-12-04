@@ -1,6 +1,6 @@
 {
   "name": "@qwickapps/cms",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
   "type": "module",
   "main": "./dist/index.js",
@@ -84,8 +84,9 @@
   ],
   "dependencies": {
     "@mui/material-nextjs": "^7.3.5",
-    "@payloadcms/email-nodemailer": "^3.63.0",
-    "@payloadcms/live-preview-react": "^3.65.0"
+    "@payloadcms/email-nodemailer": "3.65.0",
+    "@payloadcms/live-preview-react": "3.65.0",
+    "server-only": "^0.0.1"
   },
   "optionalDependencies": {
     "@qwickapps/log-client": "^1.0.0",

@@ -1,0 +1,32 @@
+version: '3.8'
+
+# Photography Portfolio Example - Docker Development Setup
+#
+# Quick Start:
+#   npm run docker:up    - Start PostgreSQL database
+#   npm run docker:seed  - Seed with demo content
+#   npm run dev          - Start Next.js dev server
+#
+# Or all-in-one:
+#   npm run docker:dev   - Start DB + seed + dev server
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: photography-portfolio-db
+    environment:
+      POSTGRES_DB: photography
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - photography_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d photography"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  photography_data:

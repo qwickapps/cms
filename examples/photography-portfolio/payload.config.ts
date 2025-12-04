@@ -1,6 +1,11 @@
 import { buildConfig } from 'payload';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 // Import collections from @qwickapps/cms
 import {
@@ -11,6 +16,8 @@ import {
   Navigation,
   Forms,
   FormSubmissions,
+  Features,
+  Products,
 } from '@qwickapps/cms/collections';
 
 // Import globals from @qwickapps/cms
@@ -30,6 +37,9 @@ export default buildConfig({
 
   admin: {
     user: Users.slug,
+    importMap: {
+      baseDir: path.resolve(dirname),
+    },
     meta: {
       titleSuffix: ' | Photography Portfolio',
     },
@@ -51,6 +61,8 @@ export default buildConfig({
     Navigation,
     Forms,
     FormSubmissions,
+    Features,
+    Products,
   ],
 
   globals: [

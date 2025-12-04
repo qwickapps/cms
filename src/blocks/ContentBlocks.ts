@@ -1100,7 +1100,14 @@ export const CardGridBlock: Block = {
           type: 'upload',
           relationTo: 'media',
           admin: {
-            description: 'Optional card image',
+            description: 'Optional card image (uploaded)',
+          },
+        },
+        {
+          name: 'imageUrl',
+          type: 'text',
+          admin: {
+            description: 'External image URL (use if not uploading)',
           },
         },
         {

@@ -201,6 +201,7 @@ interface CardGridBlockData extends BaseBlock {
     title: string;
     description?: string;
     image?: { url: string };
+    imageUrl?: string;  // External image URL fallback
     icon?: string;
     link?: string;
     linkText?: string;
@@ -755,6 +756,8 @@ function renderBlock(block: BlockData, index: number): React.ReactNode {
               // Convert icon name to Material UI icon component
               const iconData = card.icon ? iconMap[card.icon] : null;
               const IconComponent = iconData?.component;
+              // Support both uploaded images and external URLs
+              const cardImageUrl = card.image?.url || card.imageUrl;
 
               return (
                 <Card
@@ -762,13 +765,13 @@ function renderBlock(block: BlockData, index: number): React.ReactNode {
                   variant={cardGrid.cardVariant === 'elevation' ? 'elevation' : cardGrid.cardVariant === 'filled' ? 'outlined' : 'outlined'}
                   sx={{ height: '100%' }}
                 >
-                  {card.image?.url && (
+                  {cardImageUrl && (
                     <Image
-                      src={card.image.url}
+                      src={cardImageUrl}
                       alt={card.title}
                       width={400}
                       height={200}
-                      style={{ width: '100%', height: 'auto' }}
+                      style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
                     />
                   )}
                   <CardContent>

@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 // @ts-nocheck
+import 'server-only';
 
 /**
  * Server QwickApp Wrapper - Fetches navigation from CMS
