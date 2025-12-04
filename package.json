@@ -1,6 +1,6 @@
 {
   "name": "@qwickapps/cms",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
   "type": "module",
   "main": "./dist/index.js",
