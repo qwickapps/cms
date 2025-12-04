@@ -1,6 +1,6 @@
 {
   "name": "@qwickapps/cms",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
   "type": "module",
   "main": "./dist/index.js",
@@ -72,9 +72,22 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@mui/icons-material": "^6.0.0",
+    "@mui/material": "^6.0.0",
+    "@payloadcms/db-postgres": "^3.0.0",
+    "@payloadcms/next": "^3.0.0",
+    "@payloadcms/richtext-lexical": "^3.0.0",
+    "@payloadcms/ui": "^3.0.0",
+    "@qwickapps/log-client": "^1.0.0",
+    "@qwickapps/react-framework": "^1.0.0",
+    "@qwickapps/schema": "^1.0.0",
     "@types/node": "^20.11.0",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "next": "^15.0.0",
+    "payload": "^3.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "typescript": "^5.3.3"
   },
   "files": [
