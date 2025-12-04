@@ -50,7 +50,7 @@
     "./styles/admin-theme.scss": "./src/styles/admin-theme.scss"
   },
   "scripts": {
-    "build": "tsc && pnpm run copy-styles",
+    "build": "tsc && npm run copy-styles",
     "copy-styles": "mkdir -p dist/styles dist/admin/components/styles && cp src/styles/*.css dist/styles/ 2>/dev/null || true && cp src/admin/components/styles/*.css dist/admin/components/styles/ 2>/dev/null || true",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
