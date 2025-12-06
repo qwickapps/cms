@@ -1,6 +1,6 @@
 {
   "name": "@qwickapps/cms",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
   "type": "module",
   "main": "./dist/index.js",
@@ -107,9 +107,9 @@
   "license": "PolyForm-Shield-1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/raajkumars/qwickapps.git",
-    "directory": "packages/qwickapps-cms"
+    "url": "https://github.com/qwickapps/cms.git"
   },
+  "homepage": "https://github.com/qwickapps/cms#readme",
   "publishConfig": {
     "access": "public"
   }
