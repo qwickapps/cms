@@ -68,7 +68,6 @@ try {
 }
 
 try {
-  // @ts-expect-error - optional dependency, may not be installed or published
   const logClientModule = await import('@qwickapps/log-client');
   LogClientClass = logClientModule.LogClient;
 } catch {
