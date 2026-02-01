@@ -19,6 +19,9 @@ import type { Config } from 'payload';
 export interface ServerQwickAppProps {
   children: ReactNode;
   payloadConfig: Config;
+  appBar?: {
+    actions?: ReactNode;
+  };
 }
 
 /**
@@ -172,7 +175,7 @@ function getDefaultSettings() {
  * ServerQwickApp - Server Component
  * Fetches navigation and settings from CMS and passes to client component
  */
-export async function ServerQwickApp({ children, payloadConfig }: ServerQwickAppProps) {
+export async function ServerQwickApp({ children, payloadConfig, appBar }: ServerQwickAppProps) {
   const navigationData = await getNavigationData(payloadConfig);
   const settings = await getSettings(payloadConfig);
 
@@ -180,6 +183,7 @@ export async function ServerQwickApp({ children, payloadConfig }: ServerQwickApp
     <ClientSideQwickApp
       navigationItems={navigationData.items}
       initialSettings={settings}
+      appBar={appBar}
     >
       {children}
     </ClientSideQwickApp>

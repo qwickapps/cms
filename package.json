@@ -1,6 +1,6 @@
 {
   "name": "@qwickapps/cms",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
   "type": "module",
   "main": "./dist/index.js",
@@ -66,7 +66,7 @@
     "@payloadcms/ui": "^3.0.0",
     "@qwickapps/react-framework": "*",
     "@qwickapps/schema": "*",
-    "next": "^15.5.6",
+    "next": "^15.5.11",
     "payload": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -95,7 +95,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@mui/material-nextjs": "^7.3.5",
+    "@mui/material-nextjs": "^7.3.7",
     "@payloadcms/email-nodemailer": "3.65.0",
     "@payloadcms/live-preview-react": "3.65.0",
     "server-only": "^0.0.1"

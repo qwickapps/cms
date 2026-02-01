@@ -4,7 +4,7 @@ export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
     staticDir: 'media',
-    mimeTypes: ['image/*', 'video/*', 'application/pdf'],
+    mimeTypes: ['image/*', 'image/svg+xml', 'video/*', 'application/pdf'],
   },
   admin: {
     useAsTitle: 'filename',

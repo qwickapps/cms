@@ -39,12 +39,15 @@ export interface ClientSideQwickAppProps {
     }>;
   }>;
   initialSettings?: Settings | null;
+  appBar?: {
+    actions?: ReactNode;
+  };
 }
 
 /**
  * Inner component that uses settings from SettingsProvider
  */
-function QwickAppWithSettings({ children, navigationItems }: { children: ReactNode; navigationItems: any[] }) {
+function QwickAppWithSettings({ children, navigationItems, appBar }: { children: ReactNode; navigationItems: any[]; appBar?: { actions?: ReactNode } }) {
   const { settings } = useSettings();
 
   // Use settings for app name
@@ -66,6 +69,7 @@ function QwickAppWithSettings({ children, navigationItems }: { children: ReactNo
       appId="com.qwickapps.press"
       enableScaffolding={true}
       navigationItems={navigationItems}
+      appBar={appBar}
       showThemeSwitcher={showThemeSwitcher}
       showPaletteSwitcher={showPaletteSwitcher}
       defaultTheme={defaultTheme}
@@ -84,12 +88,12 @@ function QwickAppWithSettings({ children, navigationItems }: { children: ReactNo
  * ClientSideQwickApp - Client Component
  * Wraps the entire app with QwickApps framework, settings provider, and analytics
  */
-export function ClientSideQwickApp({ children, navigationItems, initialSettings }: ClientSideQwickAppProps) {
+export function ClientSideQwickApp({ children, navigationItems, initialSettings, appBar }: ClientSideQwickAppProps) {
   return (
     <AppRouterCacheProvider>
       <SettingsProvider initialSettings={initialSettings || undefined}>
         <ScriptsInjector />
-        <QwickAppWithSettings navigationItems={navigationItems}>
+        <QwickAppWithSettings navigationItems={navigationItems} appBar={appBar}>
           {children}
         </QwickAppWithSettings>
       </SettingsProvider>
