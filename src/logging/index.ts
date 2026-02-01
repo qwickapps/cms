@@ -68,6 +68,9 @@ try {
 }
 
 try {
+  // Dynamic import with type suppression for optional dependency
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore - @qwickapps/log-client is an optional dependency
   const logClientModule = await import('@qwickapps/log-client');
   LogClientClass = logClientModule.LogClient;
 } catch {
