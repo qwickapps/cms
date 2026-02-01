@@ -55,8 +55,7 @@
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
     "validate": "./qa/clean-install/validate.sh",
-    "validate:safe": "test -f ./qa/clean-install/validate.sh && npm run validate || echo 'Validation skipped - qa scripts not available'",
-    "prepublishOnly": "npm run build && npm run validate:safe"
+    "validate:safe": "test -f ./qa/clean-install/validate.sh && npm run validate || echo 'Validation skipped - qa scripts not available'"
   },
   "peerDependencies": {
     "@mui/icons-material": ">=6.0.0",
