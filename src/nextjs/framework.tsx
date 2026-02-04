@@ -33,6 +33,7 @@ export {
   Button,
   FeatureCard,
   FeatureGrid,
+  Markdown,
 
   // Structure components
   Footer,
@@ -58,6 +59,7 @@ export {
   type ButtonProps,
   type FeatureCardProps,
   type FeatureGridProps,
+  type MarkdownProps,
   type FormFieldProps,
   type FormSelectProps,
   type FormCheckboxProps,

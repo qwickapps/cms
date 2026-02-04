@@ -1,6 +1,6 @@
 {
   "name": "@qwickapps/cms",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "QwickApps CMS - Reusable Payload CMS collections, globals, and components",
   "type": "module",
   "main": "./dist/index.js",
@@ -37,6 +37,10 @@
     "./nextjs": {
       "types": "./dist/nextjs/index.d.ts",
       "default": "./dist/nextjs/index.js"
+    },
+    "./nextjs/client": {
+      "types": "./dist/nextjs/client.d.ts",
+      "default": "./dist/nextjs/client.js"
     },
     "./admin": {
       "types": "./dist/admin/index.d.ts",

@@ -22,8 +22,36 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Paper, Card, CardContent, CardActions, Collapse, IconButton, Box, Typography } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
-import { HeroBlock, Section, GridLayout, GridCell, Button, FeatureCard, Text, iconMap, ProductCard } from './framework';
+import { HeroBlock, Section, GridLayout, GridCell, Button, FeatureCard, Text, iconMap, ProductCard, Markdown } from './framework';
 import { FormBlockComponent } from './FormBlockComponent';
+
+/**
+ * Markdown content styling constants
+ * Defines consistent heading sizes and spacing for markdown blocks
+ */
+const MARKDOWN_STYLES = {
+  '& h1': {
+    fontSize: '2rem',
+    marginTop: '1.5rem',
+    marginBottom: '1rem',
+  },
+  '& h2': {
+    fontSize: '1.5rem',
+    marginTop: '1.25rem',
+    marginBottom: '0.75rem',
+  },
+  '& h3': {
+    fontSize: '1.25rem',
+    marginTop: '1rem',
+    marginBottom: '0.5rem',
+  },
+  '& p': {
+    marginBottom: '1rem',
+  },
+  '& ul, & ol': {
+    marginBottom: '1rem',
+  },
+} as const;
 
 /**
  * Type definitions for Payload block data structures
@@ -242,7 +270,16 @@ interface FormBlockData extends BaseBlock {
   padding?: 'none' | 'small' | 'medium' | 'large';
 }
 
-type BlockData = HeroBlockData | TextSectionBlockData | FeatureGridBlockData | CTASectionBlockData | ImageBlockData | SpacerBlockData | CodeBlockData | ProductGridBlockData | AccordionBlockData | CardGridBlockData | FormBlockData;
+interface MarkdownBlockData extends BaseBlock {
+  blockType: 'markdown';
+  heading?: string;
+  content: string; // Markdown content
+  textAlign?: 'left' | 'center' | 'right';
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'false';
+  padding?: 'none' | 'small' | 'medium' | 'large';
+}
+
+type BlockData = HeroBlockData | TextSectionBlockData | FeatureGridBlockData | CTASectionBlockData | ImageBlockData | SpacerBlockData | CodeBlockData | ProductGridBlockData | AccordionBlockData | CardGridBlockData | FormBlockData | MarkdownBlockData;
 
 /**
  * Props for BlockRenderer component
@@ -782,7 +819,7 @@ function renderBlock(block: BlockData, index: number): React.ReactNode {
                     )}
                     <Text variant="h6">{card.title}</Text>
                     {card.description && (
-                      <Text variant="body2" style={{ marginTop: '8px', color: 'var(--theme-on-surface-variant)' }}>
+                      <Text variant="body2" style={{ marginTop: '8px' }}>
                         {card.description}
                       </Text>
                     )}
@@ -824,6 +861,36 @@ function renderBlock(block: BlockData, index: number): React.ReactNode {
           padding={formBlock.padding}
           enableCaptcha={formBlock.form.enableCaptcha}
         />
+      );
+    }
+
+    case 'markdown': {
+      const markdownBlock = block as MarkdownBlockData;
+      const viewProps = extractViewSchemaProps(markdownBlock);
+
+      // Map maxWidth to contentMaxWidth for Section component
+      const sectionProps: Omit<typeof viewProps, 'maxWidth'> & { contentMaxWidth?: string } = {
+        ...viewProps,
+      };
+      if (markdownBlock.maxWidth) {
+        sectionProps.contentMaxWidth = markdownBlock.maxWidth;
+        delete (sectionProps as { maxWidth?: string }).maxWidth;
+      }
+
+      return (
+        <Section
+          key={key}
+          {...sectionProps}
+        >
+          {markdownBlock.heading && (
+            <Text variant="h4" align={markdownBlock.textAlign}>
+              {markdownBlock.heading}
+            </Text>
+          )}
+          <Box sx={MARKDOWN_STYLES}>
+            <Markdown>{markdownBlock.content}</Markdown>
+          </Box>
+        </Section>
       );
     }
 

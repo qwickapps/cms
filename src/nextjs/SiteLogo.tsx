@@ -87,9 +87,24 @@ export function SiteLogo({
       iconElement = undefined; // ProductLogo will use QwickIcon by default
     } else if (logoIcon === 'custom-icon' && customLogoIcon) {
       // Use custom icon
-      const iconUrl = typeof customLogoIcon === 'object' && customLogoIcon.url
+      let iconUrl = typeof customLogoIcon === 'object' && customLogoIcon.url
         ? customLogoIcon.url
         : customLogoIcon;
+
+      // Convert absolute URLs to relative URLs if they're on the same domain
+      // This prevents Next.js Image optimization "url parameter not allowed" errors
+      if (typeof iconUrl === 'string' && iconUrl.startsWith('http')) {
+        try {
+          const url = new URL(iconUrl);
+          const currentHost = typeof window !== 'undefined' ? window.location.host : '';
+          // On server, always convert to relative URL for same-origin images
+          if (typeof window === 'undefined' || url.host === currentHost) {
+            iconUrl = url.pathname + url.search + url.hash;
+          }
+        } catch (e) {
+          // Keep original URL if parsing fails
+        }
+      }
 
       const iconSize = size === 'tiny' ? 20 : size === 'small' ? 32 : size === 'medium' ? 40 : size === 'large' ? 52 : 68;
 

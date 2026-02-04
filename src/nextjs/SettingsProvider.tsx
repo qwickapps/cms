@@ -26,6 +26,11 @@ export interface Settings {
   siteName?: string;
   siteDescription?: string;
   siteUrl?: string;
+  logoIcon?: string;
+  customLogoIcon?: string;
+  logoText?: string;
+  logoBadge?: string;
+  logoBadgeShape?: 'circle' | 'square' | 'rounded';
   siteLogo?: any;
   favicon?: any;
   copyrightText?: string;

@@ -13,11 +13,11 @@
 import { QwickApp } from '@qwickapps/react-framework';
 import { PayloadDataProvider } from '@qwickapps/cms/providers';
 import { ReactNode } from 'react';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 // import '@qwickapps/react-framework/dist/index.css'; // CSS is loaded by individual components
 import { SettingsProvider, Settings, useSettings } from './SettingsProvider';
 import { ScriptsInjector } from './ScriptsInjector';
 import { SiteLogo } from './SiteLogo';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 // Create Payload data provider instance
 const payloadProvider = new PayloadDataProvider({
@@ -40,14 +40,17 @@ export interface ClientSideQwickAppProps {
   }>;
   initialSettings?: Settings | null;
   appBar?: {
-    actions?: ReactNode;
+    /** Actions to display - use render function for server/client boundary safety */
+    actions?: ReactNode | (() => ReactNode);
   };
+  /** Optional providers wrapper component (e.g., ClientProviders for auth/cart/etc) */
+  providers?: React.ComponentType<{ children: ReactNode }>;
 }
 
 /**
  * Inner component that uses settings from SettingsProvider
  */
-function QwickAppWithSettings({ children, navigationItems, appBar }: { children: ReactNode; navigationItems: any[]; appBar?: { actions?: ReactNode } }) {
+function QwickAppWithSettings({ children, navigationItems, appBar }: { children: ReactNode; navigationItems: any[]; appBar?: { actions?: ReactNode | (() => ReactNode) } }) {
   const { settings } = useSettings();
 
   // Use settings for app name
@@ -87,9 +90,12 @@ function QwickAppWithSettings({ children, navigationItems, appBar }: { children:
 /**
  * ClientSideQwickApp - Client Component
  * Wraps the entire app with QwickApps framework, settings provider, and analytics
+ *
+ * Note: AppRouterCacheProvider should be provided by the application layout (outside ServerQwickApp)
+ * to ensure Emotion cache context is available throughout the entire component tree.
  */
-export function ClientSideQwickApp({ children, navigationItems, initialSettings, appBar }: ClientSideQwickAppProps) {
-  return (
+export function ClientSideQwickApp({ children, navigationItems, initialSettings, appBar, providers: Providers }: ClientSideQwickAppProps) {
+  const innerContent = (
     <AppRouterCacheProvider>
       <SettingsProvider initialSettings={initialSettings || undefined}>
         <ScriptsInjector />
@@ -99,4 +105,7 @@ export function ClientSideQwickApp({ children, navigationItems, initialSettings,
       </SettingsProvider>
     </AppRouterCacheProvider>
   );
+
+  // Custom providers wrap the content, which now includes the Emotion cache provider
+  return Providers ? <Providers>{innerContent}</Providers> : innerContent;
 }

@@ -1245,11 +1245,80 @@ export const FormBlock: Block = {
 };
 
 /**
+ * Markdown Block - Markdown-formatted text content
+ * Maps to: @qwickapps/react-framework Markdown component
+ */
+export const MarkdownBlock: Block = {
+  slug: 'markdown',
+  labels: {
+    singular: 'Markdown Content',
+    plural: 'Markdown Content',
+  },
+  admin: {
+    components: {
+      Label: {
+        path: '/src/admin/components/BlockRowLabel#BlockRowLabel',
+        clientProps: {},
+      },
+    },
+  },
+  fields: [
+    {
+      name: 'blockName',
+      type: 'text',
+      admin: {
+        description: 'Optional custom name for this block',
+      },
+    },
+    {
+      name: 'heading',
+      type: 'text',
+      admin: {
+        description: 'Optional heading above the content',
+      },
+    },
+    {
+      name: 'content',
+      type: 'textarea',
+      required: true,
+      validate: (value: string) => {
+        if (!value || value.trim().length === 0) {
+          return 'Content is required';
+        }
+        if (value.length > 50000) {
+          return 'Content is too long (maximum 50,000 characters)';
+        }
+        return true;
+      },
+      admin: {
+        description: 'Markdown-formatted text content (max 50,000 characters)',
+        rows: 15,
+      },
+    },
+    {
+      name: 'textAlign',
+      type: 'select',
+      defaultValue: 'left',
+      options: [
+        { label: 'Left', value: 'left' },
+        { label: 'Center', value: 'center' },
+        { label: 'Right', value: 'right' },
+      ],
+      admin: {
+        description: 'Text alignment',
+      },
+    },
+    ...commonStyleFields,
+  ],
+};
+
+/**
  * All content blocks - export as array for easy reuse
  */
 export const contentBlocks: Block[] = [
   HeroBlock,
   TextSectionBlock,
+  MarkdownBlock,
   FeatureGridBlock,
   CTASectionBlock,
   ImageBlock,

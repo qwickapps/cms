@@ -50,6 +50,7 @@ export const ThemeSettings: GlobalConfig = {
           options: [
             { label: 'Default - Classic blue and neutral colors', value: 'default' },
             { label: 'Autumn - Warm oranges and golden yellows', value: 'autumn' },
+            { label: 'Boutique - Sophisticated teal, bronze, and navy', value: 'boutique' },
             { label: 'Ocean - Deep blues and aqua teals', value: 'ocean' },
             { label: 'Spring - Fresh greens and soft pinks', value: 'spring' },
             { label: 'Winter - Cool blues and icy whites', value: 'winter' },

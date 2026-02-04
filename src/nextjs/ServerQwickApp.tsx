@@ -20,8 +20,11 @@ export interface ServerQwickAppProps {
   children: ReactNode;
   payloadConfig: Config;
   appBar?: {
-    actions?: ReactNode;
+    /** Actions to display - use render function for server/client boundary safety */
+    actions?: ReactNode | (() => ReactNode);
   };
+  /** Optional providers wrapper component (e.g., ClientProviders for auth/cart/etc) */
+  providers?: React.ComponentType<{ children: ReactNode }>;
 }
 
 /**
@@ -175,7 +178,7 @@ function getDefaultSettings() {
  * ServerQwickApp - Server Component
  * Fetches navigation and settings from CMS and passes to client component
  */
-export async function ServerQwickApp({ children, payloadConfig, appBar }: ServerQwickAppProps) {
+export async function ServerQwickApp({ children, payloadConfig, appBar, providers }: ServerQwickAppProps) {
   const navigationData = await getNavigationData(payloadConfig);
   const settings = await getSettings(payloadConfig);
 
@@ -184,6 +187,7 @@ export async function ServerQwickApp({ children, payloadConfig, appBar }: Server
       navigationItems={navigationData.items}
       initialSettings={settings}
       appBar={appBar}
+      providers={providers}
     >
       {children}
     </ClientSideQwickApp>
