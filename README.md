@@ -2,6 +2,14 @@
 
 > Reusable Payload CMS collections, globals, and components for building QwickApps-powered websites
 
+## What's New in v0.4.0
+
+- **E-Commerce Integration**: Enhanced BlockRenderer with ProductCard component support for building e-commerce content
+- **Cart Functionality**: New client-side exports enable shopping cart integration in content blocks
+- **Product Support**: Pages and Posts collections now support e-commerce product displays
+
+See [CHANGELOG.md](./CHANGELOG.md) for full details.
+
 ## Overview
 
 `@qwickapps/cms` is a package that provides pre-built Payload CMS configurations for creating content management systems with the QwickApps framework. It eliminates boilerplate by providing ready-to-use collections, globals, blocks, and integrations.

@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload';
-import { contentBlocks } from '../blocks/ContentBlocks';
+import { contentBlocks } from '../blocks/ContentBlocks.js';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',

@@ -20,6 +20,23 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+
+// Cart functionality - will be dynamically imported if available
+let useCartHook: any = null;
+let useSnackbarHook: any = null;
+try {
+  const CartModule = require('@/components/cart/CartProvider');
+  useCartHook = CartModule.useCart;
+} catch (e) {
+  // Cart module not available in this project
+}
+try {
+  const SnackbarModule = require('notistack');
+  useSnackbarHook = SnackbarModule.useSnackbar;
+} catch (e) {
+  // Snackbar module not available in this project
+}
 import { Paper, Card, CardContent, CardActions, Collapse, IconButton, Box, Typography } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { HeroBlock, Section, GridLayout, GridCell, Button, FeatureCard, Text, iconMap, ProductCard, Markdown } from './framework';
@@ -721,28 +738,75 @@ function renderBlock(block: BlockData, index: number): React.ReactNode {
             spacing={productGrid.spacing}
             equalHeight={productGrid.equalHeight !== false}
           >
-            {productGrid.products.map((product) => (
-              <ProductCard
+            {productGrid.products.map((item: any) => {
+              // Unwrap polymorphic relationship format: {relationTo, value} -> value
+              const product = item?.value || item;
+              const productUrl = `/products/${product.slug}`;
+
+              return (
+              <Link
                 key={product.id}
+                href={productUrl}
+                style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+              >
+                <ProductCard
                 product={{
                   id: product.id,
                   name: product.name,
-                  category: product.category || 'Product',
+                  category: typeof product.category === 'object' ? product.category?.name : product.category || 'Product',
                   description: extractTextFromLexical(product.description),
                   shortDescription: product.tagline,
-                  features: product.features?.map((f: any) => f.title) || [],
+                  features: product.features?.map((f: any) => f.title || f.feature) || [],
                   technologies: parseTechnologies(product.technologies),
                   status: mapProductStatus(product.status),
-                  image: product.image?.url,
+                  image: product.images?.[0]?.image?.url || product.image?.url,
                   url: `/products/${product.slug}`,
+                  // E-commerce fields (fashion-products use different field names)
+                  price: product.basePrice || product.price,
+                  salePrice: product.salePrice,
+                  rating: product.averageRating || product.rating,
+                  reviewCount: product.totalReviews || product.reviewCount,
+                  isNew: product.isNew,
+                  featured: product.featured,
                 }}
                 actions={transformActions(product.actions)}
                 variant={productGrid.variant || 'compact'}
                 showImage={true}
                 showTechnologies={true}
                 maxFeaturesCompact={3}
+                onAddToCart={(product) => {
+                  // Check if block has custom handler first
+                  if (productGrid._onAddToCart) {
+                    productGrid._onAddToCart(product);
+                    return;
+                  }
+
+                  // Fallback to dynamic cart/snackbar
+                  if (cart && cart.addItem) {
+                    try {
+                      cart.addItem({
+                        productId: product.id,
+                        name: product.name,
+                        price: product.salePrice || product.price || 0,
+                        quantity: 1,
+                        image: product.image,
+                      });
+                      if (snackbar && snackbar.enqueueSnackbar) {
+                        snackbar.enqueueSnackbar(`Added ${product.name} to cart`, { variant: 'success' });
+                      }
+                    } catch (error) {
+                      if (snackbar && snackbar.enqueueSnackbar) {
+                        snackbar.enqueueSnackbar('Failed to add to cart', { variant: 'error' });
+                      }
+                    }
+                  } else {
+                    console.log('Add to cart:', product);
+                  }
+                }}
               />
-            ))}
+              </Link>
+            );
+            })}
           </GridLayout>
         </Section>
       );
@@ -970,6 +1034,10 @@ function AccordionItem({
  * Renders an array of Payload blocks as QwickApps Framework components
  */
 export function BlockRenderer({ blocks, className }: BlockRendererProps) {
+  // Try to use cart and snackbar if available
+  const cart = useCartHook ? useCartHook() : null;
+  const snackbar = useSnackbarHook ? useSnackbarHook() : null;
+
   if (!blocks || blocks.length === 0) {
     return null;
   }

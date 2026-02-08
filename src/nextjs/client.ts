@@ -9,3 +9,4 @@ export { SettingsProvider, useSettings, type Settings } from './SettingsProvider
 export { ScriptsInjector } from './ScriptsInjector.js';
 export { SiteLogo, type SiteLogoProps } from './SiteLogo.js';
 export { FooterFromSettings } from './FooterFromSettings.js';
+export { BlockRenderer } from './BlockRenderer.js';

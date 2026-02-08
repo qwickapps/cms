@@ -877,11 +877,11 @@ export const ProductGridBlock: Block = {
     {
       name: 'products',
       type: 'relationship',
-      relationTo: 'products',
+      relationTo: ['products', 'fashion-products'], // Support multiple product collections
       hasMany: true,
       required: true,
       admin: {
-        description: 'Select products to display',
+        description: 'Select products to display (from any product collection)',
       },
     },
     {
