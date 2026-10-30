@@ -15,17 +15,29 @@ import { Box } from '@mui/material';
 import { Footer, Text } from './framework';
 import { useSettings } from './SettingsProvider';
 import { getPayloadAPIClient } from '../client/PayloadAPIClient';
+import {
+  getFooterInitialState,
+  shouldFetchFooter,
+  type FooterInitialData,
+} from './footerInitialData';
 
 /**
  * FooterFromSettings - Client Component
- * Fetches footer data from Footer collection and renders with copyright
+ * Uses server-provided data when available, otherwise fetches it from Payload.
  */
-export function FooterFromSettings() {
-  const { settings } = useSettings();
-  const [footerData, setFooterData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+export function FooterFromSettings({ initialData }: { initialData?: FooterInitialData }) {
+  const { settings: providerSettings } = useSettings();
+  const [footerData, setFooterData] = useState<any>(() => getFooterInitialState(initialData).footerData);
+  const [loading, setLoading] = useState(() => getFooterInitialState(initialData).loading);
+  const settings = (initialData?.settings as any) ?? providerSettings;
 
   useEffect(() => {
+    if (!shouldFetchFooter(initialData)) {
+      setFooterData(initialData?.footer ?? null);
+      setLoading(false);
+      return;
+    }
+
     async function fetchFooter() {
       try {
         const client = getPayloadAPIClient();
@@ -47,7 +59,7 @@ export function FooterFromSettings() {
     }
 
     fetchFooter();
-  }, []);
+  }, [initialData]);
 
   // Don't render anything while loading
   if (loading) {
