@@ -30,7 +30,7 @@
     "@qwickapps/cms": "file:../..",
     "@qwickapps/react-framework": "^1.5.0",
     "@qwickapps/schema": "^1.3.2",
-    "next": "15.5.7",
+    "next": "15.5.29",
     "payload": "3.65.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
